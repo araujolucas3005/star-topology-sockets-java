@@ -28,12 +28,12 @@ public class ClientReceiver implements Runnable {
       }
 
       // printa na tela a mensagem enviada pelo servidor
-      System.out.printf("SERVIDOR: %s\n", msg);
+      System.out.printf("\nSERVIDOR: %s\n", msg);
     }
 
     // saiu do while, então o servidor não está mais ativo
-    System.out.println("CONEXÃO COM O SERVIDOR TERMINADA");
-    System.out.println("MENSAGENS NÃO SERÃO MAIS ENVIADAS E NEM RECEBIDAS");
+    System.out.println("\n<< CONEXÃO COM O SERVIDOR TERMINADA >>");
+    System.out.println("\n<< MENSAGENS NÃO SERÃO MAIS ENVIADAS E NEM RECEBIDAS >>");
     in.close();
   }
 }

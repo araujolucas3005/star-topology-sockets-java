@@ -23,22 +23,23 @@ public class ClientSender implements Runnable {
     String clientReceiverPort;
 
     while (true) {
-      System.out.println("Digite a porta do destinatário e a mensagem:");
+      System.out.print("Digite a porta do destinatário: ");
 
       // recebe a porta do destinatário
       // apenas números são aceitos
       clientReceiverPort = scanner.nextLine();
       while (!NumberUtils.isDigit(clientReceiverPort)) {
-        System.out.println(
+        System.out.print(
             "Apenas números são permitidos! Digite novamente a porta do destinatário: ");
         clientReceiverPort = scanner.nextLine();
       }
 
+      System.out.print("Agora digite a mensagem: ");
       // lê a mensagem que será enviada para o destinatário
       // não pode ser em branco
       msg = scanner.nextLine();
       while (msg.isEmpty()) {
-        System.out.println("Mensagens em branco não podem ser enviadas! Digite uma mensagem: ");
+        System.out.print("Mensagens em branco não podem ser enviadas! Digite uma mensagem válida: ");
         msg = scanner.nextLine();
       }
 

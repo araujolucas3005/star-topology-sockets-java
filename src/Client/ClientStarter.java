@@ -1,24 +1,31 @@
 package Client;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.Socket;
 
 public class ClientStarter {
 
   public static void main(String[] args) throws IOException {
     // cria o socket com o servidor
-    Socket socket = new Socket("127.0.0.1", 5050);
+    try {
+      Socket socket = new Socket("127.0.0.1", 5050);
 
-    // para lidar com o envio de mensagens do cliente
-    ClientSender clientSender = new ClientSender(socket);
+      System.out.println("MINHA PORTA: " + socket.getLocalPort());
 
-    // para lidar com o recebido de mensagens do cliente
-    ClientReceiver clientReceiver = new ClientReceiver(socket);
+      // para lidar com o envio de mensagens do cliente
+      ClientSender clientSender = new ClientSender(socket);
 
-    Thread senderThread = new Thread(clientSender);
-    senderThread.start();
+      // para lidar com o recebido de mensagens do cliente
+      ClientReceiver clientReceiver = new ClientReceiver(socket);
 
-    Thread receiverThread = new Thread(clientReceiver);
-    receiverThread.start();
+      Thread senderThread = new Thread(clientSender);
+      senderThread.start();
+
+      Thread receiverThread = new Thread(clientReceiver);
+      receiverThread.start();
+    } catch (ConnectException e) {
+      System.out.println("Servidor indisponível no momento. Tente mais tarde.");
+    }
   }
 }

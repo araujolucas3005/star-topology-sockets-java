@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ServerStarter {
 
   // hashtable para armazenar os clientes ativos
-  protected static HashMap<Integer, Socket> clients = new HashMap<>();
+  protected static Map<Integer, Socket> clients = new HashMap<>();
 
   public static void main(String[] args) throws IOException {
     // cria o socket do servidor
