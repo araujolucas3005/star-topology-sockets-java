@@ -19,26 +19,18 @@ public class ServerBroadcast implements Runnable {
       System.out.print("Envie uma mensagem para os clientes: ");
       String msg = scanner.nextLine();
 
-      // lista para adicionar possíveis clientes desconectados
-      List<Integer> deadClientsPorts = new ArrayList<>();
-
-      // envia a mensagem do servidor para cada cliente ativo
-      ServerStarter.clients
-          .forEach((port, client) -> {
-            try {
-              PrintStream outputStream = new PrintStream(client.getOutputStream(), true);
-              outputStream.write(msg.getBytes(StandardCharsets.UTF_8));
-              outputStream.write('\n');
-              outputStream.flush();
-            } catch (SocketException e) {
-              deadClientsPorts.add(port);
-            } catch (IOException e) {
-              e.printStackTrace();
-            }
-          });
-
-      // remove possíveis clientes desconectados
-      deadClientsPorts.forEach(port -> ServerStarter.clients.remove(port));
+      synchronized (ServerStarter.clients) {
+        // envia a mensagem do servidor para cada cliente ativo
+        ServerStarter.clients
+            .forEach((port, client) -> {
+              try {
+                PrintStream os = new PrintStream(client.getOutputStream(), true);
+                os.println(msg);
+              } catch (IOException e) {
+                System.out.println("Não foi possível enviar para o cliente da porta " + port);
+              }
+            });
+      }
     }
   }
 }

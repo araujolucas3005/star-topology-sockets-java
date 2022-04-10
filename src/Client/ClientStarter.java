@@ -25,7 +25,7 @@ public class ClientStarter {
       Thread receiverThread = new Thread(clientReceiver);
       receiverThread.start();
     } catch (ConnectException e) {
-      System.out.println("Servidor indisponível no momento. Tente mais tarde.");
+      System.out.println("Servidor indisponível no momento. Tente novamente mais tarde...");
     }
   }
 }

@@ -46,7 +46,6 @@ public class ClientSender implements Runnable {
       try {
         // envia uma mensagem para o servidor, que é formada pela porta do destinatário e pela mensagem escrita
         os.printf("%s@%s\n", clientReceiverPort, msg);
-        os.flush();
       } catch (NoSuchElementException e) {
         // servidor não está mais ativo
         break;

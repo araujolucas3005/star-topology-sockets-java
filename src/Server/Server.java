@@ -31,6 +31,7 @@ public class Server implements Runnable {
           break;
         }
 
+        // PORT@msg
         String[] data = msg.split("@", 2);
         receiverPort = data[0];
         msg = data[1];
